@@ -3,17 +3,22 @@
 #include <CGAL/Nef_polyhedron_3.h>
 #include <CGAL/IO/Nef_polyhedron_iostream_3.h>
 #include <CGAL/minkowski_sum_3.h>
+#include <CGAL/Polygon_vertical_decomposition_2.h>
+#include <CGAL/Polygon_triangulation_decomposition_2.h>
 
-typedef CGAL::Polyhedron_3<Kernel>                  Polyhedron_3;
-typedef CGAL::Nef_polyhedron_3<Kernel>              Nef_polyhedron_3;
-
+typedef CGAL::Polyhedron_3<Kernel> Polyhedron_3;
+typedef CGAL::Nef_polyhedron_3<Kernel> Nef_polyhedron_3;
+typedef CGAL::Polygon_vertical_decomposition_2<K> Pvd;
+typedef CGAL::Polygon_triangulation_decomposition_2<K> Ptd;
 
 template <typename T1, typename T2>
-Polygon_with_holes_2 get_minkowski(T1 p, T2 q) {
+Polygon_with_holes_2 get_minkowski(T1 p, T2 q)
+{
     return CGAL::minkowski_sum_2(p, q);
 }
 
-Polyhedron_3 polyhedron_minkowski_sum_3(Polyhedron_3& p, Polyhedron_3& q) {
+Polyhedron_3 polyhedron_minkowski_sum_3(Polyhedron_3 &p, Polyhedron_3 &q)
+{
     // convert Polyhedron to NEF
     Nef_polyhedron_3 a(p);
     Nef_polyhedron_3 b(q);
@@ -23,11 +28,13 @@ Polyhedron_3 polyhedron_minkowski_sum_3(Polyhedron_3& p, Polyhedron_3& q) {
     return result;
 }
 
-void init_minkowski(py::module & m) {
+void init_minkowski(py::module &m)
+{
+    Ptd ptd;
     auto sub = m.def_submodule("minkowski");
-    sub.def("minkowski_sum", &get_minkowski<Polygon_2, Polygon_2>);
-    sub.def("minkowski_sum", &get_minkowski<Polygon_with_holes_2, Polygon_2>);
-    sub.def("minkowski_sum", &get_minkowski<Polygon_2, Polygon_with_holes_2>);
-    sub.def("minkowski_sum", &get_minkowski<Polygon_with_holes_2, Polygon_with_holes_2>);
+    sub.def("minkowski_sum", &get_minkowski<Polygon_2, Polygon_2,ptd,ptd>);
+    sub.def("minkowski_sum", &get_minkowski<Polygon_with_holes_2, Polygon_2, ptd,ptd>);
+    sub.def("minkowski_sum", &get_minkowski<Polygon_2, Polygon_with_holes_2,ptd,ptd>);
+    sub.def("minkowski_sum", &get_minkowski<Polygon_with_holes_2, Polygon_with_holes_2,ptd,ptd>);
     sub.def("minkowski_sum", &polyhedron_minkowski_sum_3);
 }
