@@ -18,7 +18,10 @@
 
 #include "skgeom.hpp"
 #include <CGAL/minkowski_sum_2.h>
+#include <CGAL/Polygon_2.h>
+#include <CGAL/Polygon_with_holes_2.h>
 #include <type_traits>
+typedef CGAL::Polygon_2<Kernel> Polygon_2;
 template <typename T1, typename T2, typename Decomposition1, typename Decomposition2>
 Polygon_with_holes_2 get_minkowski(T1 p, T2 q, Decomposition1 decomposition1, Decomposition2 decomposition2)
 {
