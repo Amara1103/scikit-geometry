@@ -1,10 +1,8 @@
 #include "skgeom.hpp"
 
-void init_polygon(py::module &m)
+void init_decomposition(py::module &m)
 {
-    py::class_<Ptd>(m, "Decomposition")
-        .def("ptd", &Ptd::ptd);
+    py::class_<Ptd>(m, "Decomposition_ptd");
 
-    py::class_<Sabd>(m, "Decomposition")
-        .def("sabd", &Sabd::sabd);
+    py::class_<Sabd>(m, "Decomposition_sabd");
 }
