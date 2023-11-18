@@ -16,11 +16,9 @@ Polygon_with_holes_2 get_minkowski(T1 p, T2 q, Decomposition1 decomposition1, De
 
 void init_minkowski(py::module &m)
 {
-    Ptd ptd;
-    Sabd sabd;
     auto sub = m.def_submodule("minkowski");
-    sub.def("minkowski_sum_ss", &get_minkowski<Polygon_2, Polygon_2, sabd, sabd>);
-    sub.def("minkowski_sum_ps", &get_minkowski<Polygon_with_holes_2, Polygon_2, ptd, sabd>);
-    sub.def("minkowski_sum_sp", &get_minkowski<Polygon_2, Polygon_with_holes_2, sabd, ptd>);
-    sub.def("minkowski_sum_pp", &get_minkowski<Polygon_with_holes_2, Polygon_with_holes_2, ptd, ptd>);
+    sub.def("minkowski_sum", &get_minkowski<Polygon_2, Polygon_2, Sabd, Sabd>);
+    sub.def("minkowski_sum", &get_minkowski<Polygon_with_holes_2, Polygon_2, Ptd, Sabd>);
+    sub.def("minkowski_sum", &get_minkowski<Polygon_2, Polygon_with_holes_2, Sabd, Ptd>);
+    sub.def("minkowski_sum", &get_minkowski<Polygon_with_holes_2, Polygon_with_holes_2, Ptd, Ptd>);
 }
