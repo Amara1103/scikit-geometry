@@ -25,7 +25,6 @@ void init_minkowski(py::module &m)
     Ptd ptd;
     Sabd sabd;
     auto sub = m.def_submodule("minkowski");
-
     sub.def("minkowski_sum_pp", &PYBIND11_OVERLOAD(Polygon_with_holes_2, get_minkowski_wrapper, Polygon_2, Polygon_2, sabd, sabd));
     sub.def("minkowski_sum_ph", &PYBIND11_OVERLOAD(Polygon_with_holes_2, get_minkowski_wrapper, Polygon_with_holes_2, Polygon_2, ptd, sabd));
     sub.def("minkowski_sum_hp", &PYBIND11_OVERLOAD(Polygon_with_holes_2, get_minkowski_wrapper, Polygon_2, Polygon_with_holes_2, sabd, ptd));
