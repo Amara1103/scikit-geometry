@@ -19,8 +19,8 @@ void init_minkowski(py::module &m)
     Ptd ptd;
     Sabd sabd;
     auto sub = m.def_submodule("minkowski");
-    sub.def("minkowski_sum", &get_minkowski<Polygon_2, Polygon_2, sabd, sabd>);
-    sub.def("minkowski_sum", &get_minkowski<Polygon_with_holes_2, Polygon_2, ptd, sabd>);
-    sub.def("minkowski_sum", &get_minkowski<Polygon_2, Polygon_with_holes_2, sabd, ptd>);
-    sub.def("minkowski_sum", &get_minkowski<Polygon_with_holes_2, Polygon_with_holes_2, ptd, ptd>);
+    sub.def("minkowski_sum_ss", &get_minkowski<Polygon_2, Polygon_2, sabd, sabd>);
+    sub.def("minkowski_sum_ps", &get_minkowski<Polygon_with_holes_2, Polygon_2, ptd, sabd>);
+    sub.def("minkowski_sum_sp", &get_minkowski<Polygon_2, Polygon_with_holes_2, sabd, ptd>);
+    sub.def("minkowski_sum_pp", &get_minkowski<Polygon_with_holes_2, Polygon_with_holes_2, ptd, ptd>);
 }
