@@ -123,8 +123,8 @@ ext_modules = [
             'src/visibility.cpp',
             'src/arrangement.cpp',
             'src/principal_component_analysis.cpp',
-            'src/minkowski.cpp',
             'src/decomposition.cpp',
+            'src/minkowski.cpp',
             'src/optimal_transport.cpp',
             'src/skeleton.cpp',
             'src/inscribed.cpp'
