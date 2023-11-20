@@ -1,8 +1,8 @@
 #include "skgeom.hpp"
-#include <pybind11/pybind11.h>
-#include <pybind11/pytypes.h>
-#include <pybind11/operators.h>
 #include <pybind11/stl.h>
+#include <pybind11/complex.h>
+#include <pybind11/functional.h>
+#include <pybind11/chrono.h>
 void init_decomposition(py::module &m)
 {
     py::class_<Ptd>(m, "Decomposition_Ptd")
